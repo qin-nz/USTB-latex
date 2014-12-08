@@ -1,0 +1,97 @@
+%请根据需要选择一种版式
+%\documentclass[opening,cs4size,a4paper,fancyhdr,fntef,top=0.0cm]{hdyustb}% 开题报告
+%\documentclass[interim,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% 中期报告
+\documentclass[cs4size,a4paper,fancyhdr,fntef]{hdyustb}% 正文
+
+% 设置图形文件的搜索路径
+\graphicspath{{chapter/}{figures/}{ustb/}}
+
+\usepackage[sort&compress,numbers]{natbib}
+\usepackage{hypernat}
+\bibliographystyle{GBT77142005NLang}
+
+
+%设置超链接
+\usepackage[pdfstartview=FitH,bookmarksnumbered=true,bookmarksopen=true,
+colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,CJKbookmarks=true,pdftex]{hyperref}
+
+\usepackage{layout}
+%输出的Main.pdf会出现目录乱码，但是.pdf文件不会
+%或者使用rebuild.ps1生成
+
+
+\begin{document}
+%\layout
+                                \makeatletter
+\ifHDY@interim                  \makeatother
+    % 目录
+     \tableofcontents
+    % 中期报告正文
+     \include{chapter/interimReport}
+\else                           \makeatletter
+  \ifHDY@opening                \makeatother
+
+    %开题报告标题页
+    \include{opening/openingCover}
+    % 目录
+      \tableofcontents
+    % 报告正文
+     \include{opening/openingReport}
+  \else
+    % 封面-学校统一印制
+
+    % 扉页
+
+    % 声明
+    %\include{chapter/announce}
+    %\newpage
+    % 任务书
+    %\include{chapter/tasklist}
+
+%------------------------------以下为毕设主体部分---------------------------------
+
+    % 中英文摘要/关键词
+    \include{chapter/abstract}
+
+    %设置页码格式
+  \pagenumbering{arabic}
+    % 目录
+    \tableofcontents
+    % 表格目录
+    %\listoftables
+    % 插图目录
+    %\listoffigures
+    %插图或附表清单
+    %注释说明清单
+    \newpage%当目录大于1页时需要使用此句保证引言页码从引言开始编
+    \pagenumbering{arabic}
+    %引言
+    \include{chapter/foreword}
+
+
+    %文献综述
+    \include{chapter/literatureReview}
+
+    %相关知识
+    \include{chapter/knowledge}
+
+    % 正文
+    \include{chapter/body}
+
+    % 结论
+    \include{chapter/conclusion}
+
+    % 参考文献
+    \bibliography{bibfile}
+    \addcontentsline{toc}{chapter}{参考文献}
+    %%C:\CTEX\MiKTeX\bibtex\bst\base
+
+
+    % 附录
+    \include{chapter/appendix}
+    % 在学取得成果
+
+    % 致谢
+    \include{chapter/thanks}
+\fi%只用写一个/fi，但在hdyustb.cls文件定义页眉时需要写两次
+\end{document}
