@@ -1,97 +1,115 @@
-%Çë¸ù¾İĞèÒªÑ¡ÔñÒ»ÖÖ°æÊ½
-%\documentclass[opening,cs4size,a4paper,fancyhdr,fntef,top=0.0cm]{hdyustb}% ¿ªÌâ±¨¸æ
-%\documentclass[interim,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% ÖĞÆÚ±¨¸æ
-\documentclass[cs4size,a4paper,fancyhdr,fntef]{hdyustb}% ÕıÎÄ
+ï»¿%è¯·æ ¹æ®éœ€è¦é€‰æ‹©ä¸€ç§ç‰ˆå¼
+%\documentclass[utf8,opening,cs4size,a4paper,fancyhdr,fntef,top=0.0cm]{hdyustb}% å¼€é¢˜æŠ¥å‘Š
+%\documentclass[utf8,interim,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% ä¸­æœŸæŠ¥å‘Š
+%\documentclass[UTF8,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% æ­£æ–‡
+\documentclass[UTF8,tasklist,cs4size,a4paper,fancyhdr,fntef]{hdyustb}%
 
-% ÉèÖÃÍ¼ĞÎÎÄ¼şµÄËÑË÷Â·¾¶
+% è®¾ç½®å›¾å½¢æ–‡ä»¶çš„æœç´¢è·¯å¾„
 \graphicspath{{chapter/}{figures/}{ustb/}}
 
 \usepackage[sort&compress,numbers]{natbib}
 \usepackage{hypernat}
-\bibliographystyle{GBT77142005NLang}
+%\usepackage{enumitem}%åˆ—ä¸¾é¡¹ç›®
+\bibliographystyle{GBT7714-2005NLang-UTF8}
 
 
-%ÉèÖÃ³¬Á´½Ó
+%è®¾ç½®è¶…é“¾æ¥
 \usepackage[pdfstartview=FitH,bookmarksnumbered=true,bookmarksopen=true,
-colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,CJKbookmarks=true,pdftex]{hyperref}
+%colorlinks,
+linkcolor=black,anchorcolor=blue,citecolor=black,CJKbookmarks=true]{hyperref}
 
 \usepackage{layout}
-%Êä³öµÄMain.pdf»á³öÏÖÄ¿Â¼ÂÒÂë£¬µ«ÊÇ.pdfÎÄ¼ş²»»á
-%»òÕßÊ¹ÓÃrebuild.ps1Éú³É
+%è¾“å‡ºçš„Main.pdfä¼šå‡ºç°ç›®å½•ä¹±ç ï¼Œä½†æ˜¯.pdfæ–‡ä»¶ä¸ä¼š
+%æˆ–è€…ä½¿ç”¨rebuild.ps1ç”Ÿæˆ
 
 
 \begin{document}
 %\layout
+%------------------------------ä¸­æœŸæŠ¥å‘Š å¼€å§‹---------------------------------
                                 \makeatletter
 \ifHDY@interim                  \makeatother
-    % Ä¿Â¼
+    % ç›®å½•
      \tableofcontents
-    % ÖĞÆÚ±¨¸æÕıÎÄ
+    % ä¸­æœŸæŠ¥å‘Šæ­£æ–‡
      \include{chapter/interimReport}
 \else                           \makeatletter
+%------------------------------ä¸­æœŸæŠ¥å‘Š ç»“æŸ---------------------------------
+
+
+%------------------------------å¼€é¢˜æŠ¥å‘Š å¼€å§‹---------------------------------
   \ifHDY@opening                \makeatother
 
-    %¿ªÌâ±¨¸æ±êÌâÒ³
+    %å¼€é¢˜æŠ¥å‘Šæ ‡é¢˜é¡µ
     \include{opening/openingCover}
-    % Ä¿Â¼
+    % ç›®å½•
       \tableofcontents
-    % ±¨¸æÕıÎÄ
+    % å¼€é¢˜æŠ¥å‘Š
      \include{opening/openingReport}
-  \else
-    % ·âÃæ-Ñ§Ğ£Í³Ò»Ó¡ÖÆ
+  \else                         \makeatletter
+%------------------------------å¼€é¢˜æŠ¥å‘Š ç»“æŸ---------------------------------
 
-    % ìéÒ³
 
-    % ÉùÃ÷
+%------------------------------ä»»åŠ¡ä¹¦  å¼€å§‹---------------------------------
+    \ifHDY@tasklist             \makeatother
+    % ä»»åŠ¡ä¹¦
+    \include{chapter/tasklist}
+
+%------------------------------ä»»åŠ¡ä¹¦  ç»“æŸ---------------------------------
+
+%------------------------------è®ºæ–‡å…¨æ–‡  å¼€å§‹---------------------------------
+    \else
+    % å°é¢-å­¦æ ¡ç»Ÿä¸€å°åˆ¶
+
+    % æ‰‰é¡µ
+
+    % å£°æ˜
     %\include{chapter/announce}
     %\newpage
-    % ÈÎÎñÊé
-    %\include{chapter/tasklist}
 
-%------------------------------ÒÔÏÂÎª±ÏÉèÖ÷Ìå²¿·Ö---------------------------------
+    % è£…è®¢ä»»åŠ¡ä¹¦
 
-    % ÖĞÓ¢ÎÄÕªÒª/¹Ø¼ü´Ê
-    \include{chapter/abstract}
+    % ä¸­è‹±æ–‡æ‘˜è¦/å…³é”®è¯
+    %\include{chapter/abstract}
 
-    %ÉèÖÃÒ³Âë¸ñÊ½
-  \pagenumbering{arabic}
-    % Ä¿Â¼
-    \tableofcontents
-    % ±í¸ñÄ¿Â¼
-    %\listoftables
-    % ²åÍ¼Ä¿Â¼
-    %\listoffigures
-    %²åÍ¼»ò¸½±íÇåµ¥
-    %×¢ÊÍËµÃ÷Çåµ¥
-    \newpage%µ±Ä¿Â¼´óÓÚ1Ò³Ê±ĞèÒªÊ¹ÓÃ´Ë¾ä±£Ö¤ÒıÑÔÒ³Âë´ÓÒıÑÔ¿ªÊ¼±à
+    %è®¾ç½®é¡µç æ ¼å¼
     \pagenumbering{arabic}
-    %ÒıÑÔ
-    \include{chapter/foreword}
+    % ç›®å½•
+    %\tableofcontents
+    % è¡¨æ ¼ç›®å½•
+    %\listoftables
+    % æ’å›¾ç›®å½•
+    %\listoffigures
+    %æ’å›¾æˆ–é™„è¡¨æ¸…å•
+    %æ³¨é‡Šè¯´æ˜æ¸…å•
+    \newpage%å½“ç›®å½•å¤§äº1é¡µæ—¶éœ€è¦ä½¿ç”¨æ­¤å¥ä¿è¯å¼•è¨€é¡µç ä»å¼•è¨€å¼€å§‹ç¼–
+    \pagenumbering{arabic}
+    %å¼•è¨€
+    %\include{chapter/foreword}
 
 
-    %ÎÄÏ××ÛÊö
-    \include{chapter/literatureReview}
+    %æ–‡çŒ®ç»¼è¿°
+    %\include{chapter/literatureReview}
 
-    %Ïà¹ØÖªÊ¶
-    \include{chapter/knowledge}
+    %ç›¸å…³çŸ¥è¯†
+    %\include{chapter/knowledge}
 
-    % ÕıÎÄ
-    \include{chapter/body}
+    % æ­£æ–‡
+    %\include{chapter/body}
 
-    % ½áÂÛ
-    \include{chapter/conclusion}
+    % ç»“è®º
+    %\include{chapter/conclusion}
 
-    % ²Î¿¼ÎÄÏ×
+    % å‚è€ƒæ–‡çŒ®
     \bibliography{bibfile}
-    \addcontentsline{toc}{chapter}{²Î¿¼ÎÄÏ×}
+    \addcontentsline{toc}{chapter}{å‚è€ƒæ–‡çŒ®}
     %%C:\CTEX\MiKTeX\bibtex\bst\base
 
 
-    % ¸½Â¼
-    \include{chapter/appendix}
-    % ÔÚÑ§È¡µÃ³É¹û
+    % é™„å½•
+    %\include{chapter/appendix}
+    % åœ¨å­¦å–å¾—æˆæœ
 
-    % ÖÂĞ»
-    \include{chapter/thanks}
-\fi%Ö»ÓÃĞ´Ò»¸ö/fi£¬µ«ÔÚhdyustb.clsÎÄ¼ş¶¨ÒåÒ³Ã¼Ê±ĞèÒªĞ´Á½´Î
+    % è‡´è°¢
+    %\include{chapter/thanks}
+\fi%åªç”¨å†™ä¸€ä¸ª/fiï¼Œä½†åœ¨hdyustb.clsæ–‡ä»¶å®šä¹‰é¡µçœ‰æ—¶éœ€è¦å†™ä¸‰æ¬¡
 \end{document}

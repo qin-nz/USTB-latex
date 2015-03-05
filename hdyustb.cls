@@ -1,11 +1,13 @@
-\NeedsTeXFormat{LaTeX2e}
+ï»¿\NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{hdyustb}[5/11/2014 demo]
 
 \newif\ifHDY@interim
 \newif\ifHDY@opening
+\newif\ifHDY@tasklist
 
 \DeclareOption{interim}{\HDY@interimtrue}
 \DeclareOption{opening}{\HDY@openingtrue}
+\DeclareOption{tasklist}{\HDY@tasklisttrue}
 
 \ProcessOptions\relax
 \LoadClassWithOptions{ctexrep}
@@ -19,64 +21,64 @@
 %% graphics packages
 \RequirePackage{graphicx}
 
-%% sort and compress citations Ñ¹Ëõ/ÅÅĞò²Î¿¼ÎÄÏ×/
+%% sort and compress citations å‹ç¼©/æ’åºå‚è€ƒæ–‡çŒ®/
 \RequirePackage[sort&compress,numbers]{natbib}
 
 \AtEndOfPackage{\makeatletter\input{hdyustb.cfg}\makeatother}
 
 
-%----------------------------ÉèÖÃÒıÓÃ²Î¿¼ÎÄÏ×Ê±ÉÏ±êµÄ¸ñÊ½----------------------------
+%----------------------------è®¾ç½®å¼•ç”¨å‚è€ƒæ–‡çŒ®æ—¶ä¸Šæ ‡çš„æ ¼å¼----------------------------
 \let\oldcitep\citep
 \newcommand{\citen}[2][]{\textsuperscript{\oldcitep{#2}#1}}
 \renewcommand{\citep}{\citen}
 
-%----------------------------ĞŞ¸Ä ¡°Ä¿Â¼¡± ¸ñÊ½----------------------------
-\renewcommand{\contentsname}{\bf\heiti\zihao{4}\centerline {Ä¿\qquad Â¼}}
+%----------------------------ä¿®æ”¹ â€œç›®å½•â€ æ ¼å¼----------------------------
+\renewcommand{\contentsname}{\bf\heiti\zihao{4}\centerline {ç›®\qquad å½•}}
 %\titlecontents{chapter}{}
 
-% ---------------------------- ÉùÃ÷ announce begin ----------------------------
+% ---------------------------- å£°æ˜ announce begin ----------------------------
 \newenvironment{announce}{%
 \songti\zihao{4}%
 \titleformat{\section}{\bf\centering\songti\zihao{-2}}{}{0pt}{}
 \phantomsection
-\section*{Éù\quad Ã÷}
-\addcontentsline{toc}{chapter}{Éù\qquad Ã÷}
+\section*{å£°\quad æ˜}
+\addcontentsline{toc}{chapter}{å£°\qquad æ˜}
 \vspace{3ex}
 \fancyfoot[C]{}
 }%
 {}
-% ---------------------------- ÉùÃ÷ announce end ----------------------------
+% ---------------------------- å£°æ˜ announce end ----------------------------
 
 
 
 
-%---------------------------- ÒıÑÔ foreword begin ----------------------------
+%---------------------------- å¼•è¨€ foreword begin ----------------------------
 \newenvironment{foreword}
 {
 \titleformat{\section}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
 \phantomsection
-\section*{Òı\quad ÑÔ}
-\addcontentsline{toc}{chapter}{Òı\qquad ÑÔ}
+\section*{å¼•\quad è¨€}
+\addcontentsline{toc}{chapter}{å¼•\qquad è¨€}
 \vspace{3ex}
 \fancyfoot[C]{-\thepage-}
 }{}
-%---------------------------- ÒıÑÔ foreword end  ----------------------------
+%---------------------------- å¼•è¨€ foreword end  ----------------------------
 
 
 
 
-% ---------------------------- ÖĞÓ¢ÎÄÕªÒª begin ----------------------------
+% ---------------------------- ä¸­è‹±æ–‡æ‘˜è¦ begin ----------------------------
 \newenvironment{cn_abstract}
                             {
                             \titleformat{\section}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
                             \phantomsection
-                            \section*{Õª\quad Òª}
-                            \addcontentsline{toc}{chapter}{Õª\qquad Òª}
+                            \section*{æ‘˜\quad è¦}
+                            \addcontentsline{toc}{chapter}{æ‘˜\qquad è¦}
                             \fancyfoot[C]{-\thepage-}
                             %\abstract
                             }{\newpage}
 
-\newcommand\cnkeywords[1]{\vspace{2ex}\noindent{\songti\zihao{-4}\bf ¹Ø¼ü´Ê£º} #1}
+\newcommand\cnkeywords[1]{\vspace{2ex}\noindent{\songti\zihao{-4}\bf å…³é”®è¯ï¼š} #1}
 
 \newenvironment{en_abstract}{
                             \titleformat{\section}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
@@ -88,77 +90,82 @@
                             }{}
 
 \newcommand\enkeywords[1]{\vspace{2ex}\noindent{\bf Key Words:~} #1}
-% ---------------------------- ÖĞÓ¢ÎÄÕªÒª end ----------------------------
+% ---------------------------- ä¸­è‹±æ–‡æ‘˜è¦ end ----------------------------
 
 
 
-% ----------------------------½áÂÛ conclusion begin ----------------------------
+% ----------------------------ç»“è®º conclusion begin ----------------------------
 \newenvironment{conclusion}
 {
 \titleformat{\section}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
 \phantomsection
-\section*{½á\quad ÂÛ}
-\addcontentsline{toc}{chapter}{½á\qquad ÂÛ}
+\section*{ç»“\quad è®º}
+\addcontentsline{toc}{chapter}{ç»“\qquad è®º}
 \vspace{3ex}
 \fancyfoot[C]{-\thepage-}
 }{}
-% ----------------------------½áÂÛ conclusion end ----------------------------
+% ----------------------------ç»“è®º conclusion end ----------------------------
 
 
 
 
 
-% ---------------------------- ÉèÖÃÒ³Ã¼ ----------------------------
+% ---------------------------- è®¾ç½®é¡µçœ‰ ----------------------------
 
 %% fancy
-\RequirePackage{fancyhdr}%fancyhdr Ò³Ã¼Ò³½Å
+\RequirePackage{fancyhdr}%fancyhdr é¡µçœ‰é¡µè„š
 \headheight=13pt
 \marginparwidth=10pt
   \pagestyle{fancy}
  \fancyhf{}
  \ifHDY@interim
-  \fancyhead[C]{\zihao{5}±±¾©¿Æ¼¼´óÑ§±¾¿ÆÉú±ÏÒµÉè¼Æ(ÂÛÎÄ)ÖĞÆÚ±¨¸æ}
+  \fancyhead[C]{\zihao{5}åŒ—äº¬ç§‘æŠ€å¤§å­¦æœ¬ç§‘ç”Ÿæ¯•ä¸šè®¾è®¡(è®ºæ–‡)ä¸­æœŸæŠ¥å‘Š}
   \else \ifHDY@opening
- \fancyhead[C]{\zihao{5}±±¾©¿Æ¼¼´óÑ§±¾¿ÆÉú±ÏÒµÉè¼Æ(ÂÛÎÄ)Ñ¡Ìâ±¨¸æ}
- \else
-   \fancyhead[C]{\zihao{5}±±¾©¿Æ¼¼´óÑ§±¾¿ÆÉú±ÏÒµÉè¼Æ£¨ÂÛÎÄ£©}
+ \fancyhead[C]{\zihao{5}åŒ—äº¬ç§‘æŠ€å¤§å­¦æœ¬ç§‘ç”Ÿæ¯•ä¸šè®¾è®¡(è®ºæ–‡)é€‰é¢˜æŠ¥å‘Š}
+ \else \ifHDY@tasklist
+  \fancyhead[C]{\zihao{4}æ¯•~ä¸š~è®¾~è®¡ï¼ˆè®º~æ–‡ï¼‰ä»»~åŠ¡~ä¹¦}
+  \else
+    \fancyhead[C]{\zihao{5}åŒ—äº¬ç§‘æŠ€å¤§å­¦æœ¬ç§‘ç”Ÿæ¯•ä¸šè®¾è®¡ï¼ˆè®ºæ–‡ï¼‰}
+   \fi
   \fi
  \fi
- %²»ÄÜÔÚÕâÊ¹ÓÃpagenumbering{arabic}ÃüÁî£¬·ñÔòÒ³Ãæ»áÖØÖÃÎª1
+ %ä¸èƒ½åœ¨è¿™ä½¿ç”¨pagenumbering{arabic}å‘½ä»¤ï¼Œå¦åˆ™é¡µé¢ä¼šé‡ç½®ä¸º1
   \fancyfoot[C]{-\thepage-}
 
 
-  %ĞŞ¸ÄÕÂ±êÌâÒ³µÄ°æÊ½²»Ò»ÖÂ(plain) %%%,²»Ó¦ÓÃÓÚÑ¡Ìâ±¨¸æ
+  %ä¿®æ”¹ç« æ ‡é¢˜é¡µçš„ç‰ˆå¼ä¸ä¸€è‡´(plain) %%%,ä¸åº”ç”¨äºé€‰é¢˜æŠ¥å‘Š
   \fancypagestyle{plain}
  % \headheight{14pt}
   {
   \fancyhf{}
-  \ifHDY@interim
-  \fancyhead[C]{\zihao{5}±±¾©¿Æ¼¼´óÑ§±¾¿ÆÉú±ÏÒµÉè¼Æ(ÂÛÎÄ)ÖĞÆÚ±¨¸æ}
+ \ifHDY@interim
+  \fancyhead[C]{\zihao{5}åŒ—äº¬ç§‘æŠ€å¤§å­¦æœ¬ç§‘ç”Ÿæ¯•ä¸šè®¾è®¡(è®ºæ–‡)ä¸­æœŸæŠ¥å‘Š}
   \else \ifHDY@opening
- %\fancyhead[C]{}
- \fancyhead[C]{\zihao{5}±±¾©¿Æ¼¼´óÑ§±¾¿ÆÉú±ÏÒµÉè¼Æ(ÂÛÎÄ)Ñ¡Ìâ±¨¸æ}
- \else
-   \fancyhead[C]{\zihao{5}±±¾©¿Æ¼¼´óÑ§±¾¿ÆÉú±ÏÒµÉè¼Æ£¨ÂÛÎÄ£©}
+ \fancyhead[C]{\zihao{5}åŒ—äº¬ç§‘æŠ€å¤§å­¦æœ¬ç§‘ç”Ÿæ¯•ä¸šè®¾è®¡(è®ºæ–‡)é€‰é¢˜æŠ¥å‘Š}
+ \else \ifHDY@tasklist
+  \fancyhead[C]{\zihao{4}æ¯•~ä¸š~è®¾~è®¡ï¼ˆè®º~æ–‡ï¼‰ä»»~åŠ¡~ä¹¦}
+  \else
+    \fancyhead[C]{\zihao{5}åŒ—äº¬ç§‘æŠ€å¤§å­¦æœ¬ç§‘ç”Ÿæ¯•ä¸šè®¾è®¡ï¼ˆè®ºæ–‡ï¼‰}
+   \fi
   \fi
  \fi
- %²»ÄÜÔÚÕâÊ¹ÓÃpagenumbering{arabic}ÃüÁî£¬·ñÔòÒ³Ãæ»áÖØÖÃÎª1
+ %ä¸èƒ½åœ¨è¿™ä½¿ç”¨pagenumbering{arabic}å‘½ä»¤ï¼Œå¦åˆ™é¡µé¢ä¼šé‡ç½®ä¸º1
   \fancyfoot[C]{-\thepage-}
     }
 
 
 
 
-% ---------------------------- ÉèÖÃ±êÌâ¸ñÊ½----------------------------
+% ---------------------------- è®¾ç½®æ ‡é¢˜æ ¼å¼----------------------------
 \titleformat{\chapter}{\heiti\zihao{4}}{\thechapter~}{0pt}{}
 \titleformat{\section}{\heiti\zihao{-4}}{\thesection~}{0pt}{}
 \titleformat{\subsection}{\bf\songti\zihao{-4}}{\thesubsection~}{0pt}{}
-%ÂÛÎÄÒ»¼¶±êÌâÊ¹ÓÃºÚÌå4ºÅ×Ö
-%¶ş¼¶±êÌâÊ¹ÓÃºÚÌåĞ¡£´ºÅ×Ö%
-%Èı¼¶±êÌâÊ¹ÓÃ¼ÓºÚËÎÌåĞ¡£´ºÅ×Ö
+%è®ºæ–‡ä¸€çº§æ ‡é¢˜ä½¿ç”¨é»‘ä½“4å·å­—
+%äºŒçº§æ ‡é¢˜ä½¿ç”¨é»‘ä½“å°ï¼”å·å­—%
+%ä¸‰çº§æ ‡é¢˜ä½¿ç”¨åŠ é»‘å®‹ä½“å°ï¼”å·å­—
 
-% ----------------------------  ÕıÎÄ¸ñÊ½ ----------------------------
-\linespread{1.5}    %Ò³ÃæĞĞ¾àÈ¡1.5±¶
-\zihao{-4}\songti   %ÕıÎÄÊ¹ÓÃËÎÌåĞ¡£´ºÅ×Ö
+% ----------------------------  æ­£æ–‡æ ¼å¼ ----------------------------
+\linespread{1.5}    %é¡µé¢è¡Œè·å–1.5å€
+\zihao{-4}\songti   %æ­£æ–‡ä½¿ç”¨å®‹ä½“å°ï¼”å·å­—
 %//TODO:
-%Ó¢ÎÄÒ»°ãÒªÇó×ÖÌåÎª¡°Times New Roman¡±£¬×ÖºÅÓëÍ¬Ò»¼¶±ğµÄºº×ÖÏàÍ¬
+%è‹±æ–‡ä¸€èˆ¬è¦æ±‚å­—ä½“ä¸ºâ€œTimes New Romanâ€ï¼Œå­—å·ä¸åŒä¸€çº§åˆ«çš„æ±‰å­—ç›¸åŒ

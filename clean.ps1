@@ -1,7 +1,8 @@
-﻿$path = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$path = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $path=$path+"\"
+
   
-Get-ChildItem -Filter *.bak -Path $path|Remove-Item 
+Get-ChildItem -Filter *.bak -Path $path |Remove-Item 
 Get-ChildItem -Filter *.bbl -Path $path|Remove-Item
 Get-ChildItem -Filter *.aux -Path $path|Remove-Item
 Get-ChildItem -Filter *.synctex.gz -Path $path|Remove-Item
@@ -28,10 +29,3 @@ Get-ChildItem -Filter *.log -Path $child.FullName|Remove-Item
     }
  }
 
-#Path环境变量中应包含Tex位置
-pdflatex.exe  Main.tex
-bibtex.exe Main
-pdflatex.exe  Main.tex
-#gbk2uni.exe Main #索引栏的字符集转换
-pdflatex.exe  Main.tex
-SumatraPDF.exe Main.pdf
