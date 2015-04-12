@@ -10,19 +10,23 @@
 \DeclareOption{tasklist}{\HDY@tasklisttrue}
 
 \ProcessOptions\relax
-\LoadClassWithOptions{ctexrep}
+\LoadClassWithOptions{ctexbook}
 
-
+\RequirePackage{geometry}%版面设置宏包，使用\newgeometry设置
+\RequirePackage{caption}%图表标题宏包
+\RequirePackage{fontspec}%字体设置（可以设置西文和中文）
 \RequirePackage{titlesec}
+\RequirePackage{titletoc}
+\RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm}% math packages
+\RequirePackage{tabularx}% table packages
+\RequirePackage{mdwlist}%item减少行间距
+\RequirePackage{graphicx}% graphics packages
+\RequirePackage{calc}%计算
+\RequirePackage[sort&compress,numbers]{natbib}% sort and compress citations 压缩/排序参考文献/
+\RequirePackage{hypernat}%?超链接
 
-%% math packages
-\RequirePackage{amsmath,amsthm,amsfonts,amssymb,bm}
-
-%% graphics packages
-\RequirePackage{graphicx}
-
-%% sort and compress citations 压缩/排序参考文献/
-\RequirePackage[sort&compress,numbers]{natbib}
+\DeclareCaptionFont{songwu}{\songti\zihao{5}}
+\RequirePackage[font=songwu,labelsep=quad]{caption}%图表标题
 
 \AtEndOfPackage{\makeatletter\input{hdyustb.cfg}\makeatother}
 
@@ -31,10 +35,21 @@
 \let\oldcitep\citep
 \newcommand{\citen}[2][]{\textsuperscript{\oldcitep{#2}#1}}
 \renewcommand{\citep}{\citen}
-
-%----------------------------修改 “目录” 格式----------------------------
-\renewcommand{\contentsname}{\bf\heiti\zihao{4}\centerline {目\qquad 录}}
-%\titlecontents{chapter}{}
+%----------------------------参考文献----------------------------
+\renewcommand{\bibname}{参~考~文~献}
+\bibsep=0pt
+%----------------------------修改 目录 格式----------------------------
+\ifHDY@opening
+  \renewcommand{\contentsname}{\songti\zihao{3}\centerline {目\qquad 录}\vspace{20pt}}
+\else
+  \renewcommand{\contentsname}{\bf\heiti\zihao{4}\centerline {目\qquad 录}}
+\fi
+%目录中章节序列只有数字
+\CTEXsetup[name={,},number={\arabic{chapter}}]{chapter}
+%目录格式（近似Word）
+\titlecontents{chapter}[0pt]{\songti\zihao{-4}}{\contentspush{\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
+\titlecontents{section}[2em]{\songti\zihao{-4}}{\contentspush{\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
+\titlecontents{subsection}[4em]{\songti\zihao{-4}}{\contentspush{\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
 
 % ---------------------------- 声明 announce begin ----------------------------
 \newenvironment{announce}{%
@@ -111,29 +126,29 @@
 
 
 % ---------------------------- 设置页眉 ----------------------------
-
 %% fancy
-\RequirePackage{fancyhdr}%fancyhdr 页眉页脚
-\headheight=13pt
-\marginparwidth=10pt
   \pagestyle{fancy}
  \fancyhf{}
  \ifHDY@interim
   \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计(论文)中期报告}
+    \fancyfoot[C]{-\thepage-}
   \else \ifHDY@opening
  \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计(论文)选题报告}
+   \fancyfoot[C]{-\thepage-}
  \else \ifHDY@tasklist
-  \fancyhead[C]{\zihao{4}毕~业~设~计（论~文）任~务~书}
+  \fancyhead[C]{\zihao{4}\bf\songti 毕\quad 业\quad 设\quad 计（论\quad 文）任\quad 务\quad 书\vspace{1em} }
+    \fancyfoot[C]{\thepage}
+	\pagenumbering{Roman}
+	\renewcommand{\headrulewidth}{0.6pt}
+	\renewcommand{\footrulewidth}{1pt}
   \else
     \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计（论文）}
    \fi
   \fi
  \fi
- %不能在这使用pagenumbering{arabic}命令，否则页面会重置为1
-  \fancyfoot[C]{-\thepage-}
 
 
-  %修改章标题页的版式不一致(plain) %%%,不应用于选题报告
+  %修改章标题页的版式不一致(plain) %%%,不应用于任务书
   \fancypagestyle{plain}
  % \headheight{14pt}
   {
@@ -143,7 +158,10 @@
   \else \ifHDY@opening
  \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计(论文)选题报告}
  \else \ifHDY@tasklist
-  \fancyhead[C]{\zihao{4}毕~业~设~计（论~文）任~务~书}
+   \fancyhead[C]{\zihao{4}毕~业~设~计（论~文）任~务~书}
+	\pagenumbering{Roman}
+	\renewcommand{\headrulewidth}{0.6pt}
+	\renewcommand{\footrulewidth}{1pt}
   \else
     \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计（论文）}
    \fi
@@ -153,19 +171,39 @@
   \fancyfoot[C]{-\thepage-}
     }
 
-
+% ---------------------------- 版面设置----------------------------
+\ifHDY@tasklist
+  \oddsidemargin = -1pt
+  \topmargin = -38pt
+  \headsep = 35pt
+  \textheight = 700pt
+  \textwidth = 455pt
+  \marginparsep = 10pt
+  \marginparwidth = 35pt
+  \footskip = 10pt
+  \marginparpush = 7pt
+\else
+%设置页边距
+\newgeometry{left=3.5cm,right=2cm,bottom=2.5cm,top=3.5cm}
+\fi
 
 
 % ---------------------------- 设置标题格式----------------------------
-\titleformat{\chapter}{\heiti\zihao{4}}{\thechapter~}{0pt}{}
-\titleformat{\section}{\heiti\zihao{-4}}{\thesection~}{0pt}{}
-\titleformat{\subsection}{\bf\songti\zihao{-4}}{\thesubsection~}{0pt}{}
+\titleformat{\chapter}{\bf\heiti\zihao{4}}{\thechapter~}{0pt}{}
+\titleformat{\section}{\bf\heiti\zihao{-4}}{\thesection~}{0pt}{}
+\titleformat{\subsection}{\songti\zihao{-4}}{\thesubsection~}{0pt}{}
 %论文一级标题使用黑体4号字
 %二级标题使用黑体小４号字%
 %三级标题使用加黑宋体小４号字
 
 % ----------------------------  正文格式 ----------------------------
-\linespread{1.5}    %页面行距取1.5倍
+\linespread{1.5}    %页面行距取1.5倍(1.25表示1.5倍行距)
 \zihao{-4}\songti   %正文使用宋体小４号字
-%//TODO:
+\titlespacing{\chapter}{0pt}{0pt}{11pt} %章标题 段后11磅
+\titlespacing{\section}{0pt}{0pt}{0pt} %
+\titlespacing{\subsection}{0pt}{2pt}{0pt}
 %英文一般要求字体为“Times New Roman”，字号与同一级别的汉字相同
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Times New Roman}
+%----------------------------插图/表格----------------------------
