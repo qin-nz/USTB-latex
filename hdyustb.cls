@@ -22,9 +22,11 @@
 \RequirePackage{mdwlist}%item减少行间距
 \RequirePackage{graphicx}% graphics packages
 \RequirePackage{calc}%计算
-\RequirePackage[sort&compress,numbers]{natbib}% sort and compress citations 压缩/排序参考文献/
+\RequirePackage[sort&compress,numbers]{natbib}%压缩/排序参考文献
 \RequirePackage{hypernat}%?超链接
+\RequirePackage{footnote}
 
+%----------------------------插图/表格----------------------------
 \DeclareCaptionFont{songwu}{\songti\zihao{5}}
 \RequirePackage[font=songwu,labelsep=quad]{caption}%图表标题
 
@@ -112,9 +114,9 @@
 % ----------------------------结论 conclusion begin ----------------------------
 \newenvironment{conclusion}
 {
-\titleformat{\section}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
+\titleformat{\chapter}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
 \phantomsection
-\section*{结\quad 论}
+\chapter*{结\qquad 论}
 \addcontentsline{toc}{chapter}{结\qquad 论}
 \vspace{3ex}
 \fancyfoot[C]{-\thepage-}
@@ -122,22 +124,42 @@
 % ----------------------------结论 conclusion end ----------------------------
 
 
+% ----------------------------在学取得成果 achievement begin ----------------------------
+\newenvironment{achievement}
+{
+\titleformat{\chapter}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
+\phantomsection
+\chapter*{在~学~取~得~成~果}
+\addcontentsline{toc}{chapter}{在~学~取~得~成~果}
+\vspace{3ex}
+\fancyfoot[C]{-\thepage-}
+}{}
+% ----------------------------在学取得成果 achievement end ----------------------------
 
+% ----------------------------致谢 gratitude begin ----------------------------
+\newenvironment{gratitude}
+{
+\titleformat{\chapter}{\bf\centering\heiti\zihao{4}}{}{0pt}{}
+\phantomsection
+\chapter*{致\qquad 谢}
+\addcontentsline{toc}{chapter}{致\qquad 谢}
+\vspace{3ex}
+\fancyfoot[C]{-\thepage-}
+}{}
+% ----------------------------在学取得成果 gratitudet end ----------------------------
 
 
 % ---------------------------- 设置页眉 ----------------------------
 %% fancy
   \pagestyle{fancy}
+  {
  \fancyhf{}
  \ifHDY@interim
   \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计(论文)中期报告}
-    \fancyfoot[C]{-\thepage-}
   \else \ifHDY@opening
  \fancyhead[C]{\zihao{5}北京科技大学本科生毕业设计(论文)选题报告}
-   \fancyfoot[C]{-\thepage-}
  \else \ifHDY@tasklist
   \fancyhead[C]{\zihao{4}\bf\songti 毕\quad 业\quad 设\quad 计（论\quad 文）任\quad 务\quad 书\vspace{1em} }
-    \fancyfoot[C]{\thepage}
 	\pagenumbering{Roman}
 	\renewcommand{\headrulewidth}{0.6pt}
 	\renewcommand{\footrulewidth}{1pt}
@@ -146,7 +168,8 @@
    \fi
   \fi
  \fi
-
+\fancyfoot[C]{-\thepage-}
+  }
 
   %修改章标题页的版式不一致(plain) %%%,不应用于任务书
   \fancypagestyle{plain}
@@ -191,10 +214,14 @@
 % ---------------------------- 设置标题格式----------------------------
 \titleformat{\chapter}{\bf\heiti\zihao{4}}{\thechapter~}{0pt}{}
 \titleformat{\section}{\bf\heiti\zihao{-4}}{\thesection~}{0pt}{}
-\titleformat{\subsection}{\songti\zihao{-4}}{\thesubsection~}{0pt}{}
+\titleformat{\subsection}{\bf\songti\zihao{-4}}{\thesubsection~}{0pt}{}
 %论文一级标题使用黑体4号字
 %二级标题使用黑体小４号字%
 %三级标题使用加黑宋体小４号字
+
+%四级标题 不应出现，故改变样式
+%无效
+\titleformat{\subsubsection}{\songti\zihao{-4}}{\alpha{subsubsection}~}{0pt}{}
 
 % ----------------------------  正文格式 ----------------------------
 \linespread{1.5}    %页面行距取1.5倍(1.25表示1.5倍行距)
@@ -202,8 +229,8 @@
 \titlespacing{\chapter}{0pt}{0pt}{11pt} %章标题 段后11磅
 \titlespacing{\section}{0pt}{0pt}{0pt} %
 \titlespacing{\subsection}{0pt}{2pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
 %英文一般要求字体为“Times New Roman”，字号与同一级别的汉字相同
 \setmainfont{Times New Roman}
 \setsansfont{Times New Roman}
 \setmonofont{Times New Roman}
-%----------------------------插图/表格----------------------------
