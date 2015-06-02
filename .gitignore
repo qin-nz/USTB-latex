@@ -6,6 +6,35 @@
 *.fls
 *.out
 *.toc
+*.bak
+*.sav
+*.synctex.gz
+
+#beamer
+*.nav
+*.snm
+
+# HTML 
+*.4ct
+*.4tc
+*.idv
+*.lg
+*.tmp
+*.xref
+
+#output file
+*.pdf
+*.dvi
+*.css
+*.html
+![Bb]uild/*.pdf
+![Ll]inux/*.pdf
+*.docx
+![Bb]uild/*.docx
+![Wo]rd/*.docx
+
+#Matlab
+*.asv
 
 ## Intermediate documents:
 *.dvi

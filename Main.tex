@@ -1,14 +1,14 @@
 ﻿%请根据需要选择一种版式
-%\documentclass[utf8,opening,cs4size,a4paper,fancyhdr,fntef,top=0.0cm]{hdyustb}% 开题报告
-%\documentclass[utf8,interim,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% 中期报告
-%\documentclass[UTF8,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% 正文
-\documentclass[UTF8,tasklist,cs4size,a4paper,fancyhdr,fntef]{hdyustb}%
+%\documentclass[UTF8,opening,cs4size,a4paper,fancyhdr,fntef,top=0.0cm,openany]{hdyustb}% 开题报告
+%\documentclass[UTF8,interim,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% 中期报告
+\documentclass[UTF8,cs4size,a4paper,fancyhdr,fntef,openany]{hdyustb}% 正文
+%\documentclass[UTF8,tasklist,cs4size,a4paper,fancyhdr,fntef]{hdyustb}% 任务书
 
-% 设置图形文件的搜索路径
-\graphicspath{{chapter/}{figures/}{ustb/}}
 
-\usepackage[sort&compress,numbers]{natbib}
-\usepackage{hypernat}
+\headwidth=\textwidth
+
+\graphicspath{{chapter/}{figures/}{ustb/}{appendix/}}% 设置图形文件的搜索路径
+
 %\usepackage{enumitem}%列举项目
 \bibliographystyle{GBT7714-2005NLang-UTF8}
 
@@ -18,13 +18,7 @@
 %colorlinks,
 linkcolor=black,anchorcolor=blue,citecolor=black,CJKbookmarks=true]{hyperref}
 
-\usepackage{layout}
-%输出的Main.pdf会出现目录乱码，但是.pdf文件不会
-%或者使用rebuild.ps1生成
-
-
 \begin{document}
-%\layout
 %------------------------------中期报告 开始---------------------------------
                                 \makeatletter
 \ifHDY@interim                  \makeatother
@@ -39,20 +33,18 @@ linkcolor=black,anchorcolor=blue,citecolor=black,CJKbookmarks=true]{hyperref}
 %------------------------------开题报告 开始---------------------------------
   \ifHDY@opening                \makeatother
 
-    %开题报告标题页
-    \include{opening/openingCover}
-    % 目录
-      \tableofcontents
-    % 开题报告
-     \include{opening/openingReport}
+    %%开题报告标题页（为完成，因此请使用Word）
+    %\include{opening/openingCover}
+    \pagenumbering{arabic}%重置页码
+    \tableofcontents% 目录
+    \include{opening/openingReport}% 开题报告
   \else                         \makeatletter
 %------------------------------开题报告 结束---------------------------------
 
 
 %------------------------------任务书  开始---------------------------------
     \ifHDY@tasklist             \makeatother
-    % 任务书
-    \include{chapter/tasklist}
+    \include{chapter/tasklist}% 任务书
 
 %------------------------------任务书  结束---------------------------------
 
@@ -60,56 +52,42 @@ linkcolor=black,anchorcolor=blue,citecolor=black,CJKbookmarks=true]{hyperref}
     \else
     % 封面-学校统一印制
 
-    % 扉页
+    % 扉页（请使用Word，注意电脑是否安装字体）
 
-    % 声明
+    % 声明（这个看起来没问题了，但还是建议用Word吧）
     %\include{chapter/announce}
-    %\newpage
+    %\cleardoublepage
 
     % 装订任务书
 
-    % 中英文摘要/关键词
-    %\include{chapter/abstract}
-
-    %设置页码格式
+    \pagenumbering{arabic}%设置页码格式+重置页码
+    \include{chapter/abstract}% 中英文摘要/关键词
+    \cleardoublepage
+    \tableofcontents %目录
+    \listoffigures %插图或附表清单 %cls文件中把表和图混在一起了
+    %注释说明清单 略
+    \cleardoublepage
     \pagenumbering{arabic}
-    % 目录
-    %\tableofcontents
-    % 表格目录
-    %\listoftables
-    % 插图目录
-    %\listoffigures
-    %插图或附表清单
-    %注释说明清单
-    \newpage%当目录大于1页时需要使用此句保证引言页码从引言开始编
-    \pagenumbering{arabic}
-    %引言
-    %\include{chapter/foreword}
 
-
-    %文献综述
-    %\include{chapter/literatureReview}
-
-    %相关知识
-    %\include{chapter/knowledge}
+    \include{chapter/foreword}%引言
+    \include{chapter/literatureReview}%文献综述
+    \include{chapter/knowledge}%相关知识
 
     % 正文
-    %\include{chapter/body}
+    \include{chapter/body1}
+    \include{chapter/body2}
+    \include{chapter/body3}
 
     % 结论
-    %\include{chapter/conclusion}
+    \include{chapter/conclusion}
 
     % 参考文献
     \bibliography{bibfile}
     \addcontentsline{toc}{chapter}{参考文献}
-    %%C:\CTEX\MiKTeX\bibtex\bst\base
 
-
-    % 附录
-    %\include{chapter/appendix}
-    % 在学取得成果
-
-    % 致谢
-    %\include{chapter/thanks}
+    \cleardoublepage
+    \include{chapter/appendix}% 附录
+    \include{chapter/achievement}% 在学取得成果
+    \include{chapter/gratitude}% 致谢
 \fi%只用写一个/fi，但在hdyustb.cls文件定义页眉时需要写三次
 \end{document}

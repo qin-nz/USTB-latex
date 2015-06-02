@@ -1,10 +1,28 @@
-﻿%\renewcommand{\appendixtocname}{附\quad 录}
-
+﻿%额，这个格式我懒得在cls里处理了（好像不太好处理，除非定义新环境），反正是在结尾了，就这样改章节标题的定义吧。
 \titleformat{\chapter}{\heiti\zihao{4}}{附录\thechapter~}{0pt}{}
 \appendix
+\chapter{程序数据截图}
+%附录自己根据需要来input吧
+%\input{appendix/figure.tex}
 \chapter{翻译}
   \section{原文}
-  hello
+  \input{appendix/original-0.tex}
+  %\input{appendix/original-1.tex}
+%  \input{appendix/original-2.tex}
+%  \input{appendix/original-3.tex}
+%  \input{appendix/original-4.tex}
+%  \input{appendix/original-5.tex}
+  %\input{appendix/original-6.tex}
+  %\input{appendix/original-7.tex}
+  \clearpage
   \section{译文}
-  你好
-\chapter{程序代码}
+  \input{appendix/translation-0.tex}
+%  \input{appendix/translation-1.tex}
+%  \input{appendix/translation-2.tex}
+%  \input{appendix/translation-3.tex}
+%  \input{appendix/translation-4.tex}
+%  \input{appendix/translation-5.tex}
+  %\input{appendix/translation-6.tex}
+  %\input{appendix/translation-7.tex}
+%\chapter{程序代码}
+

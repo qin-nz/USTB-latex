@@ -25,6 +25,7 @@
 \RequirePackage[sort&compress,numbers]{natbib}%压缩/排序参考文献
 \RequirePackage{hypernat}%?超链接
 \RequirePackage{footnote}
+%\RequirePackage{listings}%程序代码环境
 
 %----------------------------插图/表格----------------------------
 \DeclareCaptionFont{songwu}{\songti\zihao{5}}
@@ -44,7 +45,8 @@
 \ifHDY@opening
   \renewcommand{\contentsname}{\songti\zihao{3}\centerline {目\qquad 录}\vspace{20pt}}
 \else
-  \renewcommand{\contentsname}{\bf\heiti\zihao{4}\centerline {目\qquad 录}}
+  %\renewcommand{\contentsname}{\bf\heiti\zihao{4}\centerline {目\qquad 录}}
+  \renewcommand{\contentsname}{\bf\songti\zihao{-3}\centerline {目\qquad 录}}%这里只有“目录”的字体和其他的不一样
 \fi
 %目录中章节序列只有数字
 \CTEXsetup[name={,},number={\arabic{chapter}}]{chapter}
@@ -52,6 +54,21 @@
 \titlecontents{chapter}[0pt]{\songti\zihao{-4}}{\contentspush{\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
 \titlecontents{section}[2em]{\songti\zihao{-4}}{\contentspush{\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
 \titlecontents{subsection}[4em]{\songti\zihao{-4}}{\contentspush{\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
+\titlecontents{figure}[0pt]{\songti\zihao{-4}}{\contentspush{图~\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
+\titlecontents{table}[0pt]{\songti\zihao{-4}}{\contentspush{表~\thecontentslabel~}}{}{\titlerule*[3pt]{.}\contentspage}[\addvspace{4pt}]
+
+%插图或附表的标题
+\renewcommand{\ext@table}{lof} %将附表的内容写入图的.lof文件，从而生成混合目录
+\renewcommand{\listfigurename}{\bf\heiti\zihao{4}\centerline {插图或附表清单}}
+
+% TODO 有很大问题
+%\newcommand\listfiguresandtablesname{\bf\heiti\zihao{4}\centerline {插图和附表清单}}
+%\newcommand\listoffiguresandtables
+%{
+%\section{\listfiguresandtablesname}
+%    \@starttoc{lot}%
+%    \@starttoc{lof}
+%}
 
 % ---------------------------- 声明 announce begin ----------------------------
 \newenvironment{announce}{%
